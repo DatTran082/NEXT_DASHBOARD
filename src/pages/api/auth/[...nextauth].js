@@ -11,7 +11,7 @@ import axios from 'utils/axios';
 export let users = [
   {
     id: 1,
-    name: 'Jone Doe',
+    name: 'Dat Tran',
     email: 'info@codedthemes.com',
     password: '123456'
   }
@@ -36,8 +36,10 @@ export default NextAuth({
       name: 'Google',
       clientId: process.env.REACT_APP_GOOGLE_CLIENT_ID,
       clientSecret: process.env.REACT_APP_GOOGLE_CLIENT_SECRET,
+      redirectUri: process.env.REACT_APP_GOOGLE_CLIENT_REDERECT_URI,
       authorization: {
         params: {
+          prompt: 'consent',
           prompt: 'consent',
           access_type: 'offline',
           response_type: 'code'
