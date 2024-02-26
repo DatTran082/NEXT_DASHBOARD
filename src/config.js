@@ -43,7 +43,7 @@ const config = {
    * 'ro'
    * 'zh'
    */
-  i18n: 'vi',
+  i18n: 'en',
 
   /**
    * the props used for menu orientation (diffrent theme layout).
@@ -75,7 +75,7 @@ const config = {
    * 'light' (default) - ThemeMode.LIGHT
    * 'dark' - ThemeMode.DARK
    */
-  mode: ThemeMode.LIGHT,
+  mode: ThemeMode.DARK,
 
   /**
    * the props used for theme primary color variants
@@ -90,7 +90,7 @@ const config = {
    * 'theme7'
    * 'theme8'
    */
-  presetColor: 'default',
+  presetColor: 'theme5',
 
   /**
    * the props used for default theme direction
