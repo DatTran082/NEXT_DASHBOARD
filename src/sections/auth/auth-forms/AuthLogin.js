@@ -72,7 +72,7 @@ const AuthLogin = ({ providers, csrfToken }) => {
     <>
       <Formik
         initialValues={{
-          email: 'info@codedthemes.com',
+          email: 'dattran.hn0802@gmail.com',
           password: '123456',
           submit: null
         }}
