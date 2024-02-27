@@ -75,7 +75,7 @@ const HeaderPage = () => {
                     lineHeight: { xs: 1.4, md: 1.4 }
                   }}
                 >
-                  Mantis React is a blazing-fast dashboard template built using the MUI React library.
+                  React is a blazing-fast dashboard template built using the MUI React library.
                 </Typography>
               </motion.div>
             </Grid>
