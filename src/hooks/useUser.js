@@ -22,7 +22,7 @@ const useUser = () => {
       email: user.email,
       avatar: user?.image,
       thumb,
-      role: 'UI/UX Designer'
+      role: 'Frontend developer'
     };
 
     return newUser;
