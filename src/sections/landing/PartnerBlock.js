@@ -117,7 +117,7 @@ const PartnerBlock = () => {
                   </Grid>
                   <Grid item xs={12}>
                     <Typography variant="body1">
-                      Mantis is available in multiple technologies. Simply click to dive in and discover the perfect solution for your
+                      Dashboard is available in multiple technologies. Simply click to dive in and discover the perfect solution for your
                       needs. Each sold{' '}
                       <Link variant="subtitle1" href="https://codedthemes.gitbook.io/mantis/mantis-eco-system" target="_blank">
                         separately
