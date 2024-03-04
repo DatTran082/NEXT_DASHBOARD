@@ -12,7 +12,7 @@ import { Box } from '@mui/material';
 const Page = forwardRef(({ children, title = '', meta, ...other }, ref) => (
   <>
     <Head>
-      <title>{`${title} | Mantis React Admin`}</title>
+      <title>{`${title} | Tran React Admin`}</title>
       {meta}
     </Head>
 
