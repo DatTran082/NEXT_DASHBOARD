@@ -95,15 +95,7 @@ const CallToActionPage = () => {
                   }}
                 >
                   <AnimateButton>
-                    <Button
-                      component={Link}
-                      target="_blank"
-                      href="https://github.com/codedthemes/mantis-free-react-admin-template"
-                      size="large"
-                      color="primary"
-                      variant="contained"
-                      startIcon={<DownloadOutlined />}
-                    >
+                    <Button component={Link} href="#" size="large" color="primary" variant="contained" startIcon={<DownloadOutlined />}>
                       Download Now
                     </Button>
                   </AnimateButton>

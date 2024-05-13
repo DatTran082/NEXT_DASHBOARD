@@ -156,13 +156,7 @@ const DemoBlock = () => {
                 <Grid item xs={12}>
                   <Box sx={{ display: 'inline-block' }}>
                     <AnimateButton>
-                      <Button
-                        variant="outlined"
-                        sx={{ my: 2 }}
-                        component={Link}
-                        href="https://codedthemes.gitbook.io/mantis/"
-                        target="_blank"
-                      >
+                      <Button variant="outlined" sx={{ my: 2 }} component={Link} href="#">
                         Explore Documentation
                       </Button>
                     </AnimateButton>

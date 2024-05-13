@@ -58,23 +58,23 @@ const PartnerBlock = () => {
   const partnerimage = [
     {
       image: theme.palette.mode === ThemeMode.DARK ? techCIDark : techCI,
-      link: 'https://codedthemes.com/item/mantis-codeigniter-admin-template/'
+      link: '#'
     },
     {
       image: theme.palette.mode === ThemeMode.DARK ? techReactDark : techReact,
-      link: 'https://mui.com/store/items/mantis-react-admin-dashboard-template/'
+      link: '#'
     },
     {
       image: theme.palette.mode === ThemeMode.DARK ? techAngularDark : techAngular,
-      link: 'https://codedthemes.com/item/mantis-angular-admin-template/'
+      link: '#'
     },
     {
       image: theme.palette.mode === ThemeMode.DARK ? techBootstrapDark : techBootstrap,
-      link: 'https://codedthemes.com/item/mantis-bootstrap-admin-dashboard/'
+      link: '#'
     },
     {
       image: theme.palette.mode === ThemeMode.DARK ? techDotnetDark : techDotnet,
-      link: 'https://codedthemes.com/item/mantis-dotnet-bootstrap-dashboard-template/'
+      link: '#'
     }
   ];
 
@@ -119,7 +119,7 @@ const PartnerBlock = () => {
                     <Typography variant="body1">
                       Dashboard is available in multiple technologies. Simply click to dive in and discover the perfect solution for your
                       needs. Each sold{' '}
-                      <Link variant="subtitle1" href="https://codedthemes.gitbook.io/mantis/mantis-eco-system" target="_blank">
+                      <Link variant="subtitle1" href="#" target="_blank">
                         separately
                       </Link>
                     </Typography>

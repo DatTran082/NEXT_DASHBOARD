@@ -117,19 +117,13 @@ const Header = ({ handleDrawerOpen, layout = 'landing', ...others }) => {
                   Components
                 </Link>
               </NextLink>
-              <Link className="header-link" color="white" href="https://codedthemes.gitbook.io/mantis/" target="_blank" underline="none">
+              <Link className="header-link" color="white" href="#" underline="none">
                 Documentation
               </Link>
               <Box sx={{ display: 'inline-block' }}>
                 <AnimateButton>
-                  <Button
-                    component={Link}
-                    href="https://mui.com/store/items/mantis-react-admin-dashboard-template/"
-                    disableElevation
-                    color="primary"
-                    variant="contained"
-                  >
-                    Purchase Now
+                  <Button component={Link} href="#" disableElevation color="primary" variant="contained">
+                    Exploring
                   </Button>
                 </AnimateButton>
               </Box>
@@ -204,11 +198,7 @@ const Header = ({ handleDrawerOpen, layout = 'landing', ...others }) => {
                         <ListItemText primary="All Components" primaryTypographyProps={{ variant: 'h6', color: 'text.primary' }} />
                       </ListItemButton>
                     </Link>
-                    <Link
-                      style={{ textDecoration: 'none' }}
-                      href="https://github.com/codedthemes/mantis-free-react-admin-template"
-                      target="_blank"
-                    >
+                    <Link style={{ textDecoration: 'none' }} href="#">
                       <ListItemButton component="span">
                         <ListItemIcon>
                           <LineOutlined />
@@ -232,16 +222,12 @@ const Header = ({ handleDrawerOpen, layout = 'landing', ...others }) => {
                         <ListItemText primary="Support" primaryTypographyProps={{ variant: 'h6', color: 'text.primary' }} />
                       </ListItemButton>
                     </Link>
-                    <Link
-                      style={{ textDecoration: 'none' }}
-                      href="https://mui.com/store/items/mantis-react-admin-dashboard-template/"
-                      target="_blank"
-                    >
+                    <Link style={{ textDecoration: 'none' }} href="#">
                       <ListItemButton component="span">
                         <ListItemIcon>
                           <LineOutlined />
                         </ListItemIcon>
-                        <ListItemText primary="Purchase Now" primaryTypographyProps={{ variant: 'h6', color: 'text.primary' }} />
+                        <ListItemText primary="Now" primaryTypographyProps={{ variant: 'h6', color: 'text.primary' }} />
                         <Chip color="primary" label="v1.0" size="small" />
                       </ListItemButton>
                     </Link>
