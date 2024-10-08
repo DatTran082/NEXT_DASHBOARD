@@ -1,68 +1,23 @@
-//next
-import Image from 'next/legacy/image';
-import { useRouter } from 'next/router';
-
-// material-ui
-import { useTheme } from '@mui/material/styles';
-import {
-  Autocomplete,
-  Box,
-  Button,
-  Divider,
-  FormControl,
-  FormHelperText,
-  Grid,
-  InputLabel,
-  MenuItem,
-  Select,
-  Stack,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
-  TextField,
-  Typography
-} from '@mui/material';
-import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers';
-import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
-
+import { Button, Grid, InputLabel, Stack, TextField } from '@mui/material';
 // third party
-import * as yup from 'yup';
-import { v4 as UIDV4 } from 'uuid';
-import { format } from 'date-fns';
-import { FieldArray, Form, Formik } from 'formik';
+import { Form, Formik } from 'formik';
 
 // project import
 import Layout from 'layout';
 import Page from 'components/Page';
 import MainCard from 'components/MainCard';
 
-import { useDispatch, useSelector } from 'store';
-import {
-  customerPopup,
-  toggleCustomerPopup,
-  selectCountry,
-  getInvoiceInsert,
-  reviewInvoicePopup,
-  getInvoiceList
-} from 'store/reducers/invoice';
-
 // assets
-import { EditOutlined, PlusOutlined } from '@ant-design/icons';
 
 // ==============================|| INVOICE - CREATE ||============================== //
 
 const Create = () => {
-  const theme = useTheme();
-  const dispatch = useDispatch();
-  const { open, isCustomerOpen, countries, country, lists, isOpen } = useSelector((state) => state.invoice);
-  const router = useRouter();
+  // const theme = useTheme();
+
   const notesLimit = 500;
 
   return (
-    <Page title="Invoice Create">
+    <Page title="Json formater">
       <MainCard>
         <Formik
           initialValues={{}}
@@ -70,7 +25,7 @@ const Create = () => {
             console.log(values);
           }}
         >
-          {({ handleBlur, errors, handleChange, handleSubmit, values, isValid, setFieldValue, touched }) => {
+          {({ handleChange, handleSubmit, values, isValid }) => {
             return (
               <Form onSubmit={handleSubmit}>
                 <Grid container spacing={2}>
@@ -106,13 +61,13 @@ const Create = () => {
                         color="secondary"
                         disabled={values.status === '' || !isValid}
                         sx={{ color: 'secondary.dark' }}
-                        onClick={() =>
-                          dispatch(
-                            reviewInvoicePopup({
-                              isOpen: true
-                            })
-                          )
-                        }
+                        // onClick={() =>
+                        //   dispatch(
+                        //     reviewInvoicePopup({
+                        //       isOpen: true
+                        //     })
+                        //   )
+                        // }
                       >
                         Preview
                       </Button>
