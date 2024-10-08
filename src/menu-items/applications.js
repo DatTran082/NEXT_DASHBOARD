@@ -8,6 +8,7 @@ import {
   CustomerServiceOutlined,
   FileTextOutlined,
   MessageOutlined,
+  ToolOutlined,
   ShoppingCartOutlined,
   UserOutlined,
   AppstoreAddOutlined
@@ -19,6 +20,7 @@ const icons = {
   CalendarOutlined,
   CustomerServiceOutlined,
   MessageOutlined,
+  ToolOutlined,
   ShoppingCartOutlined,
   UserOutlined,
   AppstoreAddOutlined,
@@ -33,6 +35,26 @@ const applications = {
   icon: icons.AppstoreAddOutlined,
   type: 'group',
   children: [
+    {
+      id: 'tools',
+      title: <FormattedMessage id="tools" />,
+      type: 'collapse',
+      icon: icons.ToolOutlined,
+      children: [
+        {
+          id: 'json',
+          title: <FormattedMessage id="json" />,
+          type: 'item',
+          url: '/apps/tools/json'
+        },
+        {
+          id: 'text',
+          title: <FormattedMessage id="text" />,
+          type: 'item',
+          url: '/apps/tools/text'
+        }
+      ]
+    },
     {
       id: 'chat',
       title: <FormattedMessage id="chat" />,
