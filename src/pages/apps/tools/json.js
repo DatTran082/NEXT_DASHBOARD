@@ -72,7 +72,7 @@ const Create = () => {
                         Preview
                       </Button>
                       <Button variant="outlined" color="secondary" sx={{ color: 'secondary.dark' }}>
-                        Save
+                        Convert
                       </Button>
                       <Button color="primary" variant="contained" type="submit">
                         Create & Send
