@@ -9,6 +9,7 @@ import {
   FileTextOutlined,
   MessageOutlined,
   ToolOutlined,
+  DiscordOutlined,
   ShoppingCartOutlined,
   UserOutlined,
   AppstoreAddOutlined
@@ -21,6 +22,7 @@ const icons = {
   CustomerServiceOutlined,
   MessageOutlined,
   ToolOutlined,
+  DiscordOutlined,
   ShoppingCartOutlined,
   UserOutlined,
   AppstoreAddOutlined,
@@ -35,6 +37,20 @@ const applications = {
   icon: icons.AppstoreAddOutlined,
   type: 'group',
   children: [
+    {
+      id: 'games',
+      title: <FormattedMessage id="games" />,
+      type: 'collapse',
+      icon: icons.DiscordOutlined,
+      children: [
+        {
+          id: 'json',
+          title: <FormattedMessage id="treasure-hunt" />,
+          type: 'item',
+          url: '/apps/games/treasure-hunt'
+        }
+      ]
+    },
     {
       id: 'tools',
       title: <FormattedMessage id="tools" />,
