@@ -1,7 +1,7 @@
 import { Button, Grid, InputLabel, Stack, TextField } from '@mui/material';
 // third party
 import { Form, Formik } from 'formik';
-
+import { JsonEditor } from 'json-edit-react';
 // project import
 import Layout from 'layout';
 import Page from 'components/Page';
@@ -101,6 +101,16 @@ const Create = () => {
                             justifyContent: 'flex-end'
                           }
                         }}
+                      />
+                    </Stack>
+                  </Grid>
+                  <Grid item xs={12}>
+                    <Stack spacing={1}>
+                      <InputLabel>result</InputLabel>
+                      <JsonEditor
+                        data={values?.raw?.replaceAll(/\\/g, '').replaceAll(/"{/g, '{').replaceAll(/}"/g, '}')}
+                        // setData={setJsonData} // optional
+                        // {...otherProps}
                       />
                     </Stack>
                   </Grid>
