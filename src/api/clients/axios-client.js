@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { data } from 'data/org-chart';
 import queryString from 'query-string';
 
 // import { envConfig } from '../../config';
@@ -25,30 +26,23 @@ axiosClient.interceptors.request.use(async (config) => {
 
 axiosClient.interceptors.response.use(
   (response) => {
-    if (response && response.data) {
-      return response.data;
-    }
-
-    return response;
+    try {
+      if (response && response.data) {
+        return response.data;
+      }
+      return response;
+    } catch (error) {}
   },
   async (error) => {
-    // const config = error?.config;
+    if (error) {
+      const modifiedError = {
+        data: null,
+        code: error?.response?.status || 444,
+        message: error?.response?.data?.message || error.message || 'An error occurred'
+      };
 
-    // if (error?.response?.status === 401 && !config?.sent) {
-    //   config.sent = true;
-
-    //   const result = await processToken();
-
-    //   if (result?.accessToken) {
-    //     config.headers = {
-    //       ...config.headers,
-    //       authorization: `Bearer ${result?.accessToken}`,
-    //     };
-    //   }
-
-    //   return axios(config);
-    // }
-    return Promise.reject(error);
+      return modifiedError;
+    }
   }
 );
 

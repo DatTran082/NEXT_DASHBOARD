@@ -31,7 +31,8 @@ import IconButton from 'components/@extended/IconButton';
 import { PopupTransition } from 'components/@extended/Transitions';
 import { HeaderSort, IndeterminateCheckbox, TablePagination } from 'components/third-party/ReactTable';
 
-import AddCustomer from 'sections/apps/customer/AddCustomer';
+import AddMap from 'sections/apps/games/AddMaps';
+// import AddCustomer from 'sections/apps/customer/AddCustomer';
 import CustomerView from 'sections/apps/customer/CustomerView';
 import AlertCustomerDelete from 'sections/apps/customer/AlertCustomerDelete';
 
@@ -40,7 +41,7 @@ import { renderFilterTypes, GlobalFilter } from 'utils/react-table';
 
 // assets
 import { CloseOutlined, PlusOutlined, EyeTwoTone, EditTwoTone, DeleteTwoTone } from '@ant-design/icons';
-import gamesApi from 'api/games-api';
+import { gamesApi } from '../../../api';
 // import { set } from 'lodash';
 
 // ==============================|| REACT TABLE ||============================== //
@@ -394,7 +395,8 @@ const TreasureMapsPage = () => {
           sx={{ '& .MuiDialog-paper': { p: 0 }, transition: 'transform 225ms' }}
           aria-describedby="alert-dialog-slide-description"
         >
-          <AddCustomer customer={customer} onCancel={handleAdd} />
+          {/* <AddCustomer customer={customer} onCancel={handleAdd} /> */}
+          <AddMap onCancel={handleAdd} />
         </Dialog>
       </MainCard>
     </Page>

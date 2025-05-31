@@ -2,13 +2,14 @@ import client from './clients/axios-client';
 
 const gamesApi = {
   treasureHunt: {
-    createMaps: (params) => {
+    createMap: (data) => {
       const url = '/TreasureHunt/CreateMap';
-      // const pagination = params?.pagination ?? { pageNumber: 1, pageSize: 1000 };
-      return client.post(url, { ...params });
+
+      return client.post(url, { ...data });
     },
     getAllMaps: (params) => {
       const url = '/TreasureHunt/GetAllMaps';
+      // const pagination = params?.pagination ?? { pageNumber: 1, pageSize: 1000 };
       return client.get(url, { params });
     },
     getMapById: (params) => {
