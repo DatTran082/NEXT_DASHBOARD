@@ -342,7 +342,7 @@ const TreasureMapsPage = () => {
         accessor: 'columns'
       },
       {
-        Header: 'maxLevel',
+        Header: 'Treasure Value',
         accessor: 'maxLevel'
         // Cell: ContactCell
       },

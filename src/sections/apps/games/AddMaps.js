@@ -150,7 +150,7 @@ const AddMap = ({ onSubmit, onCancel }) => {
       if (response.code == 0) {
         console.log('actions', actions);
 
-        // onSubmit && onSubmit(values);
+        onSubmit && onSubmit(values);
         actions.setSubmitting(false);
         actions.resetForm();
       } else {

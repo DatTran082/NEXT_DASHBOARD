@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { data } from 'data/org-chart';
+// import { data } from 'data/org-chart';
 import queryString from 'query-string';
 
 // import { envConfig } from '../../config';
