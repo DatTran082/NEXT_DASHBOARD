@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import { useCallback, useEffect, useMemo, useState, Fragment } from 'react';
+import { useRouter } from 'next/router';
 
 // material-ui
 import { alpha, useTheme } from '@mui/material/styles';
@@ -33,14 +34,14 @@ import { HeaderSort, IndeterminateCheckbox, TablePagination } from 'components/t
 
 import AddMap from 'sections/apps/games/AddMaps';
 // import AddCustomer from 'sections/apps/customer/AddCustomer';
-import CustomerView from 'sections/apps/customer/CustomerView';
+import MapsView from 'sections/apps/games/MapsView';
 import AlertCustomerDelete from 'sections/apps/customer/AlertCustomerDelete';
 
-import makeData from 'data/react-table';
+// import makeData from 'data/react-table';
 import { renderFilterTypes, GlobalFilter } from 'utils/react-table';
 
 // assets
-import { CloseOutlined, PlusOutlined, EyeTwoTone, EditTwoTone, DeleteTwoTone } from '@ant-design/icons';
+import { PlusOutlined, EyeTwoTone } from '@ant-design/icons';
 import { gamesApi } from '../../../api';
 // import { set } from 'lodash';
 
@@ -213,11 +214,15 @@ StatusCell.propTypes = {
 };
 
 const ActionsCell = (row, setCustomer, setCustomerDeleteId, handleClose, handleAdd, theme) => {
-  const collapseIcon = row.isExpanded ? (
-    <CloseOutlined style={{ color: theme.palette.error.main }} />
-  ) : (
-    <EyeTwoTone twoToneColor={theme.palette.secondary.main} />
-  );
+  const collapseIcon = <EyeTwoTone twoToneColor={theme.palette.secondary.main} />;
+  const router = useRouter();
+  const handleRedirect = () => {
+    router.push({
+      pathname: `/apps/games/details/${row.original?.mapId}`,
+      query: { data: JSON.stringify(row.original) }
+    });
+  };
+
   return (
     <Stack direction="row" alignItems="center" justifyContent="center" spacing={0}>
       <Tooltip title="View">
@@ -225,13 +230,13 @@ const ActionsCell = (row, setCustomer, setCustomerDeleteId, handleClose, handleA
           color="secondary"
           onClick={(e) => {
             e.stopPropagation();
-            row.toggleRowExpanded();
+            handleRedirect(row.original.mapId);
           }}
         >
           {collapseIcon}
         </IconButton>
       </Tooltip>
-      <Tooltip title="Edit">
+      {/* <Tooltip title="Edit">
         <IconButton
           color="primary"
           onClick={(e) => {
@@ -254,7 +259,7 @@ const ActionsCell = (row, setCustomer, setCustomerDeleteId, handleClose, handleA
         >
           <DeleteTwoTone twoToneColor={theme.palette.error.main} />
         </IconButton>
-      </Tooltip>
+      </Tooltip> */}
     </Stack>
   );
 };
@@ -285,7 +290,7 @@ SelectionHeader.propTypes = {
 const TreasureMapsPage = () => {
   const theme = useTheme();
 
-  const data = useMemo(() => makeData(5), []);
+  // const data = useMemo(() => makeData(5), []);
   const [maps, setMaps] = useState('');
   const [open, setOpen] = useState(false);
   const [customer, setCustomer] = useState(null);
@@ -297,9 +302,20 @@ const TreasureMapsPage = () => {
     if (customer && !add) setCustomer(null);
   };
 
-  const fetchData = async (params) => {
+  const handleMapCreated = () => {
+    const fetch = async () => {
+      const result = await fetchData();
+
+      setMaps(result || []);
+
+      // console.log('log from map CALLBACK: ');
+    };
+    fetch();
+  };
+
+  const fetchData = async () => {
     const response = await gamesApi.treasureHunt.getAllMaps({});
-    console.log('response: ', response, params);
+    // console.log('response: ', response, params);
 
     if (response?.code == 0) {
       const { data } = response;
@@ -316,6 +332,7 @@ const TreasureMapsPage = () => {
     };
     fetch();
   }, []);
+
   const handleClose = () => {
     setOpen(!open);
   };
@@ -333,17 +350,17 @@ const TreasureMapsPage = () => {
         // Cell: CustomerCell
       },
       {
-        Header: 'rows',
+        Header: 'rows (N)',
         accessor: 'rows',
         disableSortBy: true
       },
       {
-        Header: 'columns',
+        Header: 'columns (M)',
         accessor: 'columns'
       },
       {
-        Header: 'Treasure Value',
-        accessor: 'maxLevel'
+        Header: 'Treasure Value (P)',
+        accessor: 'treasureValue'
         // Cell: ContactCell
       },
       {
@@ -367,7 +384,13 @@ const TreasureMapsPage = () => {
     [theme]
   );
 
-  const renderRowSubComponent = useCallback(({ row }) => <CustomerView data={data[Number(row.id)]} />, [data]);
+  const renderRowSubComponent = useCallback(
+    ({ row }) => {
+      // return <MapsView data={maps[Number(row.id)]} />;
+      return <MapsView data={row.original} />;
+    },
+    [maps]
+  );
 
   return (
     <Page title="Customer List">
@@ -396,7 +419,7 @@ const TreasureMapsPage = () => {
           aria-describedby="alert-dialog-slide-description"
         >
           {/* <AddCustomer customer={customer} onCancel={handleAdd} /> */}
-          <AddMap onCancel={handleAdd} />
+          <AddMap callBack={handleMapCreated} onCancel={handleAdd} />
         </Dialog>
       </MainCard>
     </Page>

@@ -20,9 +20,9 @@ const gamesApi = {
       const url = 'TreasureHunt/DeleteMap';
       return client.delete(url, { params });
     },
-    solvingMaps: (params) => {
+    solvingMaps: (data) => {
       const url = '/TreasureHunt/solve';
-      return client.get(url, { params });
+      return client.post(url, { ...data });
     }
   }
 };

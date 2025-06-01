@@ -1,4 +1,4 @@
-import { useState } from 'react';
+// import { useState } from 'react';
 import PropTypes from 'prop-types';
 import {
   Box,
@@ -14,24 +14,24 @@ import {
   Typography
 } from '@mui/material';
 import * as Yup from 'yup';
-import { useFormik, FormikProvider } from 'formik';
+import { useFormik, FormikProvider, Form } from 'formik';
 import gamesApi from '../../../api/games-api';
 
 const getInitialMatrix = (n, m) => Array.from({ length: n }, () => Array(m).fill(0));
 
-const AddMap = ({ onSubmit, onCancel }) => {
-  const [dimensions, setDimensions] = useState({ n: 5, m: 5 });
+const AddMap = ({ callBack, onCancel }) => {
+  // const [dimensions, setDimensions] = useState({ n: 5, m: 5 });
 
   const formik = useFormik({
     initialValues: {
       name: 'test-map',
       n: 3,
       m: 3,
-      p: 9,
+      p: 3,
       matrix: [
-        [1, 2, 4],
-        [3, 5, 6],
-        [7, 8, 9]
+        [3, 2, 3],
+        [3, 3, 3],
+        [2, 2, 1]
       ]
     },
     validationSchema: Yup.object().shape({
@@ -39,8 +39,8 @@ const AddMap = ({ onSubmit, onCancel }) => {
       n: Yup.number().min(1, 'Min 1 row').max(20, 'Max 20 rows').required('Rows (n) required'),
       m: Yup.number().min(1, 'Min 1 column').max(500, 'Max 500 columns').required('Columns (m) required'),
       p: Yup.number()
-        .min(1, 'Min level is 1')
-        .test('max-p', 'p <= n * m', function (value) {
+        .min(1, 'P >= 1')
+        .test('max-p', 'P <= n * m', function (value) {
           const { n, m } = this.parent;
           return value <= n * m;
         })
@@ -59,23 +59,22 @@ const AddMap = ({ onSubmit, onCancel }) => {
   const { values, errors, touched, handleSubmit, setFieldValue, getFieldProps } = formik; //isSubmitting
 
   const handleCreate = async (values, actions) => {
-    console.log('Creating new map with values:', values);
     try {
       const request = {
         request_time: new Date().toISOString(),
         data: values
       };
+      console.log('gamesApi.treasureHunt.createMap.request:', request);
 
       const response = await gamesApi.treasureHunt.createMap(request);
 
       if (response.code == 0) {
-        console.log('actions', actions);
-
-        onSubmit && onSubmit(values);
+        callBack && callBack(values);
         actions.setSubmitting(false);
         actions.resetForm();
+        onCancel && onCancel();
       } else {
-        console.log('Map:', response.data);
+        // console.log('Map:', response.data);
       }
     } catch (error) {
       console.error('Error creating map:', error);
@@ -90,7 +89,7 @@ const AddMap = ({ onSubmit, onCancel }) => {
     const n = field === 'n' ? value : values.n;
     const m = field === 'm' ? value : values.m;
     setFieldValue(field, value);
-    setDimensions({ n, m });
+    // setDimensions({ n, m });
     setFieldValue('matrix', getInitialMatrix(n, m));
   };
 
@@ -100,14 +99,12 @@ const AddMap = ({ onSubmit, onCancel }) => {
       rowIdx === i ? row.map((cell, colIdx) => (colIdx === j ? Number(val) : cell)) : row
     );
     setFieldValue('matrix', newMatrix);
-
-    console.log(dimensions);
   };
 
   return (
     <FormikProvider value={formik}>
-      {/* <Form autoComplete="off" noValidate onSubmit={handleSubmit}> */}
-      <form noValidate onSubmit={handleSubmit}>
+      <Form autoComplete="off" noValidate onSubmit={handleSubmit}>
+        {/* <form noValidate onSubmit={handleSubmit}> */}
         <DialogTitle>New Map</DialogTitle>
         <Divider />
         <DialogContent sx={{ p: 2.5 }}>
@@ -202,8 +199,8 @@ const AddMap = ({ onSubmit, onCancel }) => {
             Add
           </Button>
         </DialogActions>
-        {/* </Form> */}
-      </form>
+      </Form>
+      {/* </form> */}
     </FormikProvider>
   );
 };
