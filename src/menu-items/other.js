@@ -173,7 +173,7 @@ const other = {
       id: 'documentation',
       title: <FormattedMessage id="documentation" />,
       type: 'item',
-      url: 'https://codedthemes.gitbook.io/mantis/',
+      url: '#',
       icon: icons.QuestionOutlined,
       external: true,
       target: true,
@@ -187,7 +187,7 @@ const other = {
       id: 'roadmap',
       title: <FormattedMessage id="roadmap" />,
       type: 'item',
-      url: 'https://codedthemes.gitbook.io/mantis/roadmap',
+      url: '#',
       icon: icons.DeploymentUnitOutlined,
       external: true,
       target: true
