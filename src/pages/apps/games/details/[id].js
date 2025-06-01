@@ -8,7 +8,7 @@ import { useRouter } from 'next/router';
 import { Box, Button, Grid, Stack, Typography } from '@mui/material';
 
 // import MapsView from 'sections/apps/games/MapsView';
-import MapDetails from 'sections/apps/games/MapDetails';
+import Matrix from 'sections/apps/games/Matrix';
 import MatrixGraph from 'sections/apps/games/Graph';
 
 // project import
@@ -122,7 +122,7 @@ const Create = () => {
               <Typography variant="h5">Matrix</Typography>
             </Grid>
             <Grid item xs={12}>
-              <MapDetails data={initdata} />
+              <Matrix data={initdata} />
               {/* <Divider /> */}
             </Grid>
 

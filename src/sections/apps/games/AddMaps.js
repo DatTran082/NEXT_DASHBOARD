@@ -15,6 +15,7 @@ import {
 } from '@mui/material';
 import * as Yup from 'yup';
 import { useFormik, FormikProvider, Form } from 'formik';
+// import Matrix from 'sections/apps/games/Matrix';
 import gamesApi from '../../../api/games-api';
 
 const getInitialMatrix = (n, m) => Array.from({ length: n }, () => Array(m).fill(0));
@@ -36,7 +37,7 @@ const AddMap = ({ callBack, onCancel }) => {
     },
     validationSchema: Yup.object().shape({
       name: Yup.string().required('Name is required'),
-      n: Yup.number().min(1, 'Min 1 row').max(20, 'Max 20 rows').required('Rows (n) required'),
+      n: Yup.number().min(1, 'Min 1 row').max(200, 'Max 200 rows').required('Rows (n) required'),
       m: Yup.number().min(1, 'Min 1 column').max(500, 'Max 500 columns').required('Columns (m) required'),
       p: Yup.number()
         .min(1, 'P >= 1')
@@ -47,12 +48,6 @@ const AddMap = ({ callBack, onCancel }) => {
         .required('Max Level (p) required'),
       matrix: Yup.array().of(Yup.array().of(Yup.number()))
     }),
-    // onSubmit: (values, { setSubmitting }) => {
-    //   console.log('Form maps Values:', values);
-
-    //   onSubmit && onSubmit(values);
-    //   setSubmitting(false);
-    // },
     onSubmit: (values, actions) => handleCreate(values, actions)
   });
 
@@ -70,7 +65,6 @@ const AddMap = ({ callBack, onCancel }) => {
 
       if (response.code == 0) {
         callBack && callBack(values);
-        actions.setSubmitting(false);
         actions.resetForm();
         onCancel && onCancel();
       } else {
@@ -80,25 +74,30 @@ const AddMap = ({ callBack, onCancel }) => {
       console.error('Error creating map:', error);
       actions.setErrors({ submit: 'Failed to create map. Please try again.' });
     } finally {
-      // actions.setSubmitting(false);
+      actions.setSubmitting(false);
     }
   };
 
-  // Update matrix size when n or m changes
   const handleDimensionChange = (field, value) => {
     const n = field === 'n' ? value : values.n;
     const m = field === 'm' ? value : values.m;
     setFieldValue(field, value);
-    // setDimensions({ n, m });
     setFieldValue('matrix', getInitialMatrix(n, m));
   };
 
-  // Handle matrix cell change
   const handleMatrixChange = (i, j, val) => {
     const newMatrix = values.matrix.map((row, rowIdx) =>
       rowIdx === i ? row.map((cell, colIdx) => (colIdx === j ? Number(val) : cell)) : row
     );
     setFieldValue('matrix', newMatrix);
+  };
+
+  const handleRandomMatrix = () => {
+    const n = values.n;
+    const m = values.m;
+    const p = values.p;
+    const randomMatrix = Array.from({ length: n }, () => Array.from({ length: m }, () => Math.floor(Math.random() * (p + 1))));
+    setFieldValue('matrix', randomMatrix);
   };
 
   return (
@@ -130,7 +129,7 @@ const AddMap = ({ callBack, onCancel }) => {
                   id="map-n"
                   {...getFieldProps('n')}
                   onChange={(e) => handleDimensionChange('n', Number(e.target.value))}
-                  inputProps={{ min: 1, max: 20 }}
+                  inputProps={{ min: 1, max: 200 }}
                   error={Boolean(touched.n && errors.n)}
                   helperText={touched.n && errors.n}
                 />
@@ -169,6 +168,11 @@ const AddMap = ({ callBack, onCancel }) => {
               </Typography>
               <Box sx={{ overflowX: 'auto' }}>
                 <Grid container spacing={1}>
+                  <Grid item xs={12} sx={{ mb: 1 }}>
+                    <Button variant="outlined" onClick={handleRandomMatrix}>
+                      Random Fill Matrix
+                    </Button>
+                  </Grid>
                   {Array.from({ length: values.n }).map((_, i) => (
                     <Grid item xs={12} key={i}>
                       <Stack direction="row" spacing={1}>
@@ -177,7 +181,10 @@ const AddMap = ({ callBack, onCancel }) => {
                             key={j}
                             type="number"
                             value={values.matrix[i]?.[j] ?? 0}
-                            onChange={(e) => handleMatrixChange(i, j, e.target.value)}
+                            onChange={(e) => {
+                              console.log(`Matrix change:`, values);
+                              handleMatrixChange(i, j, e.target.value);
+                            }}
                             inputProps={{ min: 0, max: values.p }}
                             sx={{ width: 60 }}
                           />
@@ -188,6 +195,16 @@ const AddMap = ({ callBack, onCancel }) => {
                 </Grid>
               </Box>
             </Grid>
+            {/* <Grid item xs={12}>
+              <Typography variant="subtitle1" sx={{ mb: 1 }}>
+                Matrix 2d
+              </Typography>
+              <Box sx={{ overflowX: 'auto' }}>
+                <Grid container spacing={1}>
+                  <Matrix data={[]} map2d={values?.matrix} />
+                </Grid>
+              </Box>
+            </Grid> */}
           </Grid>
         </DialogContent>
         <Divider />

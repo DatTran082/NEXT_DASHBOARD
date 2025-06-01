@@ -9,7 +9,7 @@ import { Grid, Divider, Stack, TableCell, TableRow, Typography } from '@mui/mate
 
 // project import
 import MainCard from 'components/MainCard';
-import MapDetails from 'sections/apps/games/MapDetails';
+import MapDetails from 'sections/apps/games/Matrix';
 // import Avatar from 'components/@extended/Avatar';
 import Transitions from 'components/@extended/Transitions';
 
