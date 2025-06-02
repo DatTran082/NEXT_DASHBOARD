@@ -92,11 +92,34 @@ const AddMap = ({ callBack, onCancel }) => {
     setFieldValue('matrix', newMatrix);
   };
 
+  // const handleRandomMatrix = () => {
+  //   const n = values.n;
+  //   const m = values.m;
+  //   const p = values.p;
+  //   const randomMatrix = Array.from({ length: n }, () => Array.from({ length: m }, () => Math.floor(Math.random() * (p + 1))));
+  //   setFieldValue('matrix', randomMatrix);
+  // };
+
   const handleRandomMatrix = () => {
     const n = values.n;
     const m = values.m;
     const p = values.p;
-    const randomMatrix = Array.from({ length: n }, () => Array.from({ length: m }, () => Math.floor(Math.random() * (p + 1))));
+
+    let flat = [];
+    for (let i = 1; i <= Math.min(p, n * m); i++) {
+      flat.push(i);
+    }
+    while (flat.length < n * m) {
+      flat.push(Math.floor(Math.random() * p) + 1);
+    }
+    for (let i = flat.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [flat[i], flat[j]] = [flat[j], flat[i]];
+    }
+    const randomMatrix = [];
+    for (let i = 0; i < n; i++) {
+      randomMatrix.push(flat.slice(i * m, (i + 1) * m));
+    }
     setFieldValue('matrix', randomMatrix);
   };
 
