@@ -2,6 +2,9 @@
   "name": "material-react-next",
   "version": "2.1.0",
   "private": true,
+    "engines": {
+    "node": "20.x"
+  },
   "scripts": {
     "dev": "next dev -p 3000",
     "build": "next build",
